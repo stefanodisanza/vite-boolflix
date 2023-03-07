@@ -1,36 +1,46 @@
+
 <template>
     <main>
-        <div class="container-card">
+        <div class="container-card" v-for="film, i in details" :key="i">
             <div class="card">
-
+                <div> Titolo: {{ film.title }}</div>
+                <div>Titolo Originale: {{ film.original_title }}</div>
+                <div>Lingua: {{ film.original_language }}</div>
+                <div>Voto: {{ film.vote_average }}</div>
             </div>
         </div>
+    <!-- <ul>
+            <li >
+              <div>{{film.title}}</div>
+              <div>{{film.original_title}}</div>
+              <div>{{film.original_language}}</div>
+              <div>{{film.vote_average}}</div>
+            </li>
+                    </ul> -->
     </main>
 </template>
 
 <script>
+// import Axios from 'axios'
 export default {
     name: 'MyMain',
-    created() {
+    props: {
+        details: Array
     },
-    methods: {
-        getArray() {
-
-        }
-    }
 }
 </script>
 
 <style lang="scss" scoped>
-main {
-    margin: 0 auto;
-    width: 70%;
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
 }
 
-.container-card {
-    // debug
-    height: 200px;
-    width: 100px;
-    background-color: rgb(158, 23, 23);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 </style>

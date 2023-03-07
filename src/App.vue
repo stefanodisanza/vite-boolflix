@@ -1,7 +1,7 @@
 <template>
   <div>
-    <MyHeader />
-    <MyMain />
+    <MyHeader @search="saveArrayFilms" />
+    <MyMain :details="ArrayFilmsFromSearch" />
   </div>
 </template>
 
@@ -14,6 +14,17 @@ export default {
   components: {
     MyHeader,
     MyMain,
+  },
+  data() {
+    return {
+      ArrayFilmsFromSearch: [],
+    }
+  },
+  methods: {
+    saveArrayFilms(val) {
+      this.ArrayFilmsFromSearch = val
+      console.log("array dall'header", this.ArrayFilmsFromSearch);
+    }
   }
 }
 
@@ -25,10 +36,13 @@ export default {
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 </style>
