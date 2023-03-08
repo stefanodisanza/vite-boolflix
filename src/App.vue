@@ -1,7 +1,7 @@
 <template>
   <div>
-    <MyHeader @search="saveArrayFilms" />
-    <MyMain :details="ArrayFilmsFromSearch" />
+    <MyHeader @searchFilm="saveArrayFilms" @searchTv="saveArrayTv" />
+    <MyMain :listFilm="ArrayFilmsFromSearch" :listTv="ArrayTvFromSearch" />
   </div>
 </template>
 
@@ -18,12 +18,17 @@ export default {
   data() {
     return {
       ArrayFilmsFromSearch: [],
+      ArrayTvFromSearch: [],
     }
   },
   methods: {
     saveArrayFilms(val) {
       this.ArrayFilmsFromSearch = val
-      console.log("array dall'header", this.ArrayFilmsFromSearch);
+      console.log("array dall'header film", this.ArrayFilmsFromSearch);
+    },
+    saveArrayTv(val) {
+      this.ArrayTvFromSearch = val
+      console.log("array dall'header tv", this.ArrayTvFromSearch);
     }
   }
 }

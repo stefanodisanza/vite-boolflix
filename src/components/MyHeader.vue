@@ -17,16 +17,28 @@ export default {
         return {
             query: "",
             listFilm: [],
-            apiUrl:
-                "https://api.themoviedb.org/3/search/movie?api_key=2727abe6f9cfef8ece88aac30548b0e1",
+            listTv: [],
+            apiUrlFilm:
+                "https://api.themoviedb.org/3/search/movie?api_key=2727abe6f9cfef8ece88aac30548b0e1&language=en-US&page=1&include_adult=false",
+            apiUrlTv:
+                "https://api.themoviedb.org/3/search/tv?api_key=2727abe6f9cfef8ece88aac30548b0e1&language=en-US&page=1&include_adult=false",
         };
     },
     methods: {
+        // funzione che mi ritorna l'array di film e serie tv
         getArray() {
-            Axios.get(`${this.apiUrl}&query=${this.query}`).then((res) => {
+            // chiamata axios che mi torna i film
+            Axios.get(`${this.apiUrlFilm}&query=${this.query}`).then((res) => {
                 this.listFilm = res.data.results;
-                console.log("axios mi ritorna:", this.listFilm);
-                this.$emit('search', this.listFilm)
+                console.log("axios mi torna questi film:", this.listFilm);
+                this.$emit("searchFilm", this.listFilm);
+            });
+            // https://api.themoviedb.org/3/search/tv?api_key=2727abe6f9cfef8ece88aac30548b0e1&language=en-US&page=1&include_adult=false
+            // chiamata axios che mi torna i le serie tv
+            Axios.get(`${this.apiUrlTv}&query=${this.query}`).then((res) => {
+                this.listTv = res.data.results;
+                console.log("axios mi torna queste serie tv:", this.listTv);
+                this.$emit("searchTv", this.listTv);
             });
         },
     },
