@@ -13,7 +13,7 @@
                         <div>Titolo Originale: {{ film.original_title }}</div>
                         <div class="language">Lingua: <img class="mini_flag" :src="insertFlag(film.original_language)" />
                         </div>
-                        <div>Voto: {{ film.vote_average }}</div>
+                        <div>Voto: {{ Math.floor(film.vote_average / 2) }}</div>>
                     </div>
                 </div>
             </div>
@@ -32,8 +32,11 @@
                         <div>Titolo Originale: {{ tv.original_name }}</div>
                         <div class="language">Lingua: <img class="mini_flag" :src="insertFlag(tv.original_language)" />
                         </div>
-                        <div>Voto: {{ tv.vote_average }} <span v-for="star in starsVote(tv.vote_average)" :key="star"><img
-                                    :src="star" :alt="star"></span></div>
+                        <div>Voto: {{ tv.vote_average }}
+                            <span v-for="star in starsVote(tv.vote_average)" :key="star">
+                                <img :src="star" :alt="star">
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
