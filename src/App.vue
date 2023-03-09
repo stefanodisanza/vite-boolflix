@@ -1,19 +1,18 @@
 <template>
-  <div>
+  <div id="app">
     <MyHeader @searchFilm="saveArrayFilms" @searchTv="saveArrayTv" />
     <MyMain :listFilm="ArrayFilmsFromSearch" :listTv="ArrayTvFromSearch" />
   </div>
 </template>
 
 <script>
-import MyHeader from './components/MyHeader.vue';
-import MyMain from './components/MyMain.vue';
-
+import MyHeader from './components/MyHeader.vue'
+import MyMain from './components/MyMain.vue'
 export default {
   name: 'App',
   components: {
     MyHeader,
-    MyMain,
+    MyMain
   },
   data() {
     return {
@@ -32,17 +31,14 @@ export default {
     }
   }
 }
-
-
 </script>
 
 <style lang="scss">
-@use './style/general.scss';
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
   color: #2c3e50;
+  margin-top: 60px;
 }
 
 * {
