@@ -13,7 +13,15 @@
                         <div>Titolo Originale: {{ film.original_title }}</div>
                         <div class="language">Lingua: <img class="mini_flag" :src="insertFlag(film.original_language)" />
                         </div>
-                        <div>Voto: {{ Math.floor(film.vote_average / 2) }}</div>>
+                        <!-- contenitore del voto -->
+                        <div>
+                            Voto:
+                            <span v-for="star, i in arrayStar" :key="i">
+                                <i v-if="i > (film.vote_average / 2) - 1" class="far fa-star"></i>
+                                <i v-else class="star" :class="star"></i>
+                            </span>
+                        </div>
+                        <!-- //contenitore del voto -->
                     </div>
                 </div>
             </div>
@@ -23,7 +31,8 @@
         <div class="container-card" v-for="tv in listTv" :key="tv.id">
             <div class="card">
                 <div class="cover">
-                    <img v-if="tv.poster_path !== null" :src="coverUrl + tv.poster_path" :alt="tv.title" />
+                    <img class="cover-img" v-if="tv.poster_path !== null" :src="coverUrl + tv.poster_path"
+                        :alt="tv.title" />
                     <img v-else class="cover-netflix"
                         src="https://i.pinimg.com/564x/01/e1/35/01e135a5bcabe81ce279076de8dfbfd9.jpg" alt="">
                     <!-- container info -->
@@ -32,11 +41,15 @@
                         <div>Titolo Originale: {{ tv.original_name }}</div>
                         <div class="language">Lingua: <img class="mini_flag" :src="insertFlag(tv.original_language)" />
                         </div>
-                        <div>Voto: {{ tv.vote_average }}
-                            <span v-for="star in starsVote(tv.vote_average)" :key="star">
-                                <img :src="star" :alt="star">
+                        <!-- contenitore del voto -->
+                        <div>
+                            Voto:
+                            <span v-for="star, i in arrayStar" :key="i">
+                                <i v-if="i > (tv.vote_average / 2) - 1" class="far fa-star"></i>
+                                <i v-else class="star" :class="star"></i>
                             </span>
                         </div>
+                        <!-- //contenitore del voto -->
                     </div>
                 </div>
             </div>
@@ -60,7 +73,13 @@ export default {
             itFlag: itFlag,
             enFlag: enFlag,
             frFlag: frFlag,
-            arrayStar: []
+            arrayStar: [
+                'fas fa-star',
+                'fas fa-star',
+                'fas fa-star',
+                'fas fa-star',
+                'fas fa-star',
+            ]
         };
     },
     methods: {
@@ -75,14 +94,7 @@ export default {
                 return 'https://www.unr.edu/main/images/news/blog/progress-flag.jpg';
             }
         },
-        starsVote(vote) {
-            const arrayStar = [];
-            for (let i = 0; i < Math.floor(vote / 2); i++) {
-                arrayStar.push("https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png");
-            }
-            return arrayStar;
-        }
-    }
+    },
 };
 </script>
   
@@ -112,6 +124,23 @@ main {
     align-items: center;
     justify-content: flex-start;
     height: 100%;
+}
+
+.cover-img {
+    height: 500px;
+}
+
+.cover-netflix {
+    width: 342px;
+    height: 100%;
+}
+
+.star {
+    color: yellow;
+}
+
+.none {
+    display: none;
 }
 
 img {
